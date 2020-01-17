@@ -21,13 +21,10 @@
 
           <div class="media">
             <div class="media-left media-top">
-              <a href="/profile/{{hood.profile.id}}" title="profile">
-                <img class="img-fluid rounded-circle" src="{{hood.admin.profile_photo.cdn_url}}" class="media-object" style="height: 100px;width: 100px;">
-                <button class="button"><a href="{% url 'join' operation='join' pk=hood.id%}">Join</a></button>
-              </a>
+             
               <p>{{hood.hood_name}}</p>
             </div>
-
+            <p>{{hood.occupants_count}}</p>
           </div>
           <hr>
 

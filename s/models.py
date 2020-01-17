@@ -6,6 +6,9 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 # Create your models here.
 
+class Location(models.Model):
+    name = models.Charfield(max_length=100, blank=True, null=True)
+
 class Hood(models.Model):
     hood_photo = ImageField(blank=True,manual_crop='')
     hood_name = models.CharField(max_length=100, blank=True, null=True)

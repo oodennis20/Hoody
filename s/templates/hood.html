@@ -1,0 +1,48 @@
+{%extends 'base.html'%}
+{% block content %}
+{{ block.super}}
+{% load bootstrap4 %}
+
+<br>
+<br>
+<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-4">
+      <button type="button" name="button">Leave Neighbourhood</button>
+      <h4>Police and Healthcare</h4>
+    </div>
+    <div class="col-6">
+      {%  %}
+
+      <div class="card mr-0" style="max-width:30rem; margin-top:5px;">
+
+        <img src="{{}}" class="card-img-top">
+        <div class="card-body">
+
+          <div class="media">
+            <div class="media-left media-top">
+
+              <a href="/profile/{{}}" title="profile">
+                <img class="img-fluid rounded-circle" src="{{}}" class="media-object" style="height: 100px;
+width: 100px;">
+                <button class="button"><a href="">Join</a></button>
+              </a>
+              <p>{{hood.hood_name}}</p>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      {% endfor %}
+    </div>
+    <div class="col-2">
+      <h4>List of Neighbours</h4>
+    </div>
+    {% endblock %}
+  </div>
+</div>
