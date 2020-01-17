@@ -12,6 +12,11 @@ class Hood(models.Model):
     occupants_count = models.IntegerField(blank=True, null=True)
     admin = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
+    @classmethod
+    def_hoods(cls):
+        hoods = Hood.objects.all()
+
+        return hoods
 
 class Business(models.Model):
     b_photo = ImageField(blank=True,manual_crop='')
@@ -20,6 +25,12 @@ class Business(models.Model):
     b_email = models.CharField(max_length=100, blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
     hood = models.ForeignKey(Hood, on_delete=models.CASCADE, null=True)
+
+    @classmethod
+    def_business(cls):
+        business = Business.objects.all()
+
+        return business
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE,null=True)
