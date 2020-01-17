@@ -22,7 +22,7 @@ def signup(request):
             current_user.save()
             current_site = get_current_site(request)
             mail_subject = 'Activate your Hoods account.'
-            message = render_to_string('acc_active_email.html', {
+            message = render_to_string('registration/acc_active_email.html', {
                 'user': current_user,
                 'domain': current_site.domain,
                 'uid':urlsafe_base64_encode(force_bytes(current_user.pk)),
@@ -36,7 +36,7 @@ def signup(request):
             return HttpResponse('Please confirm your email address to complete the registration')
     else:
         form = SignupForm()
-    return render(request, 'signup.html', {'form': form})
+    return render(request, 'registration/signup.html', {'form': form})
 
 def activate(request, uidb64, token):
     try:
@@ -84,6 +84,7 @@ def add_profile(request):
         if form.is_valid():
             profile = form.save(commit=False)
             profile.user = current_user
+            profile.email = current_user.email
             profile.save()
         return redirect('home')
 
