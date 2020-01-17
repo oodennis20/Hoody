@@ -61,6 +61,21 @@ def home(request):
 
     return render(request,"home.html",{"hoods":hoods, "business":business,"profile":profile})
 
+def new_business(request):
+    current_user = request.user
+
+    if request.method == 'POST':
+        form = NewBusinessForm(request.POST, request.FILES)
+        if form.is_valid():
+            business = form.save(commit=False)
+            business.user = current_user
+            business.save()
+            return redirect('neighbourhood')
+
+    else:
+        form = NewBusinessForm()
+    return render(request, 'new_business.html', {"form": form})
+
 @login_required(login_url="/accounts/login/")
 def join(request,operation,pk):
     hood = get_object_or_404(Hood,pk=pk)
