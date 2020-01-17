@@ -8,11 +8,15 @@ from django.dispatch import receiver
 
 class Location(models.Model):
     name = models.Charfield(max_length=100, blank=True, null=True)
+    
+    def __str__(self):
+        return self.name
 
 class Hood(models.Model):
     hood_photo = ImageField(blank=True,manual_crop='')
     hood_name = models.CharField(max_length=100, blank=True, null=True)
     occupants_count = models.IntegerField(blank=True, null=True)
+    location = models.ForeignKey(Location)
     admin = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
     @classmethod
