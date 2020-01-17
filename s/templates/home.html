@@ -14,7 +14,7 @@
     <div class="col-11">
       {% for hood in hoods %}
 
-      <div class="card mr-0" style="max-width:70rem; margin-top:5px;">
+      <div class="card mr-0" style="max-width:30rem; margin-top:5px;">
 
         <img src="{{hood.hood_photo.cdn_url}}" class="card-img-top">
         <div class="card-body">
@@ -22,10 +22,10 @@
           <div class="media">
             <div class="media-left media-top">
               <a href="/profile/{{hood.profile.id}}" title="profile">
-                <img class="img-fluid rounded-circle" src="{{hood.profile.profile_photo.cdn_url}}" class="media-object" style="height: 100px;width: 100px;">
+                <img class="img-fluid rounded-circle" src="{{hood.admin.profile_photo.cdn_url}}" class="media-object" style="height: 100px;width: 100px;">
                 <button class="button"><a href="" target="_blank">Join</a></button>
               </a>
-
+              <p>{{hood.hood_name}}</p>
             </div>
 
           </div>
