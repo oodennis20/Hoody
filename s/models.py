@@ -13,7 +13,7 @@ class Hood(models.Model):
     admin = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
     @classmethod
-    def_hoods(cls):
+    def get_hoods(cls):
         hoods = Hood.objects.all()
 
         return hoods
@@ -27,7 +27,7 @@ class Business(models.Model):
     hood = models.ForeignKey(Hood, on_delete=models.CASCADE, null=True)
 
     @classmethod
-    def_business(cls):
+    def get_business(cls):
         business = Business.objects.all()
 
         return business

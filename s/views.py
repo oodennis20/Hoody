@@ -59,8 +59,6 @@ def home(request):
 
     hoods= Hood.get_hoods()
 
-    return redirect('home')
-
     return render(request,"home.html",{"hoods":hoods, "business":business,"profile":profile})
 
 
