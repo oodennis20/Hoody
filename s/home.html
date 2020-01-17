@@ -2,6 +2,42 @@
 {% block content %}
 {{ block.super}}
 {% load bootstrap4 %}
+
+<br>
+<br>
 <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 
 {% endblock %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-11">
+      {% for hood in hoods %}
+
+      <div class="card mr-0" style="max-width:70rem; margin-top:5px;">
+
+        <img src="{{hood.hood_photo.cdn_url}}" class="card-img-top">
+        <div class="card-body">
+
+          <div class="media">
+            <div class="media-left media-top">
+              <a href="/profile/{{hood.profile.id}}" title="profile">
+                <img class="img-fluid rounded-circle" src="{{hood.profile.profile_photo.cdn_url}}" class="media-object" style="height: 100px;width: 100px;">
+                <button class="button"><a href="" target="_blank">Join</a></button>
+              </a>
+
+            </div>
+
+          </div>
+          <hr>
+
+
+        </div>
+
+      </div>
+
+      {% endfor %}
+    </div>
+    {% endblock %}
+  </div>
+</div>

@@ -53,6 +53,17 @@ def activate(request, uidb64, token):
     else:
         return HttpResponse('Activation link is invalid!')
 
+def home(request):
+    profile = Profile.get_profile()
+    business = Business.get_business()
+
+    hoods= Hood.get_hoods()
+
+    return redirect('home')
+
+    return render(request,"home.html",{"hoods":hoods, "business":business,"profile":profile})
+
+
 @login_required(login_url='/accounts/login')
 def profile(request,profile_id):
 
