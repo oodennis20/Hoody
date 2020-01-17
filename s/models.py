@@ -27,3 +27,18 @@ class Profile(models.Model):
         profile = Profile.objects.all()
 
         return profile
+
+class Hood(models.Model):
+    hood_photo = ImageField(blank=True,manual_crop='')
+    hood_name = models.CharField(max_length=100, blank=True, null=True)
+    occupants_count = models.IntegerField(blank=True, null=True)
+    admin = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+
+
+class Business(models.Model):
+    b_photo = ImageField(blank=True,manual_crop='')
+    b_name = models.CharField(max_length=100, blank=True, null=True)
+    b_description = models.TextField(max_length=200, blank=True, null=True)
+    b_email = models.CharField(max_length=100, blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+    hood = models.ForeignKey(Hood, on_delete=models.CASCADE, null=True)
