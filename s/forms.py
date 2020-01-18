@@ -2,6 +2,12 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import *
 
+class CreateHoodForm(forms.ModelForm):
+
+	class Meta:
+		model = Hood
+		exclude = ['user','occupants_count']
+
 class EditProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
@@ -10,7 +16,7 @@ class EditProfileForm(forms.ModelForm):
 class BusinessForm(forms.ModelForm):
     class Meta:
         model = Business
-        exclude = ['user']
+        exclude = ['user','hood']
 
 class SignupForm(UserCreationForm):
     email = forms.EmailField(max_length=200, help_text='Required')

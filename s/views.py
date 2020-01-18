@@ -76,6 +76,7 @@ def new_business(request):
         if form.is_valid():
             business = form.save(commit=False)
             business.user = current_user
+            business.hood = request.user.join.hood_id
             business.save()
             return redirect('home')
 
@@ -150,4 +151,19 @@ def create_post(request):
 		else:
 			form = PostForm()
 		return render(request,'posts/createpost.html',{"form":form})
+
+@login_required(login_url='/account/login/')
+def create_hood(request):
+    current_user = request.user
+    if request.method == 'POST'
+        form = CreateHoodForm(request.POST, request.FILES)
+        if form.is_valid():
+            hood = form.save(commit = False)
+            hood.user = current_user
+            hood.save()
+            messages.success(request, 'You Have succesfully created a hood.Now proceed and join a hood')
+        return redirect('home')
+    else:
+        form = CreateHoodForm()
+    return render(request,'hoods/create_hood.html',{"form":form})
 
