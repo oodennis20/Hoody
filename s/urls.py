@@ -11,6 +11,8 @@ urlpatterns = [
     url(r'^profile/$',views.profile,name = 'profile'),
     url(r'^editprofile/$',views.edit_profile,name= 'edit_profile'),
     url(r'^new/business', views.new_business, name='add_business'),
+    url(r'^join/(\d+)',views.join,name = 'join'),
+    url(r'^myhood/$',views.hoods,name = 'hood'),
 ]
 
 if settings.DEBUG:

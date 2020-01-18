@@ -101,16 +101,22 @@ def edit_profile(request):
         form = EditProfileForm(instance = profile)
     return render(request, 'profiles/edit_profile.html', {"form": form})
 
-@login_required(login_url="/accounts/login/")
-def join(request,operation,pk):
-    hood = get_object_or_404(Hood,pk=pk)
+@login_required(login_url='/accounts/login/')
+def join(request,hoodId):
 
-    if operation == 'join':
-        hood.join += 1
-        hood.save()
-        return render(request, "hood.html", {"hood":hood})
-    elif operation =='unjoin':
-        hood.join -= 1
-        hood.save()
-    return redirect('home')
+	hood = Hood.objects.get(pk = hoodId)
+	if Join.objects.filter(user_id = request.user).exists():
+
+		Join.objects.filter(user_id = request.user).update(hood_id = hood)
+	else:
+
+		Join(user_id=request.user,hood_id = hood).save()
+
+	messages.success(request, 'Success! You have succesfully joined this Neighbourhood ')
+	return redirect('hoods')
+
+def hoods(request):
+
+	hoods = Hood.objects.filter(user = request.user)
+	return render(request,'hoods/hood.html',{"hoods":hoods})
 
