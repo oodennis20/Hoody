@@ -16,7 +16,7 @@ class Hood(models.Model):
     hood_name = models.CharField(max_length=100, null=True)
     occupants_count = models.PositiveIntegerField(default=0)
     location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True)
-    admin = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     @classmethod
     def get_hoods(cls):
@@ -29,7 +29,7 @@ class Hood(models.Model):
 
 
 class Business(models.Model):
-    b_photo = ImageField(blank=True,manual_crop='')
+    b_photo = ImageField(blank=True,manual_crop='', null=True)
     b_name = models.CharField(max_length=100, blank=True, null=True)
     b_description = models.TextField(max_length=200, blank=True, null=True)
     b_email = models.CharField(max_length=100, blank=True, null=True)

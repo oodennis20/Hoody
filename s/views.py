@@ -11,6 +11,7 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
+from django.contrib import messages
 
 # Create your views here.
 def signup(request):
@@ -54,12 +55,18 @@ def activate(request, uidb64, token):
         return HttpResponse('Activation link is invalid!')
 
 def home(request):
-    profile = Profile.get_profile()
-    business = Business.get_business()
-
-    hoods= Hood.get_hoods()
-
-    return render(request,"home.html",{"hoods":hoods, "business":business,"profile":profile})
+    if request.user.is_authenticated:
+        if Join.objects.filter(user_id = request.user).exists():
+            hood = Hood.objects.get(pk = request.user.join.hood_id.id)
+            posts =" Posts.objects.filter(hood = request.user.join.hood_id.id)"
+            businesses = Business.objects.filter(hood = request.user.join.hood_id.id)
+            return render(request,'hoods/hood.html',{"hood":hood,"businesses":businesses,"posts":posts})
+        else:
+            neighbourhoods = Hood.objects.all()
+            return render(request,'index.html',{"neighbourhoods":neighbourhoods})
+    else:
+        neighbourhoods = Hood.objects.all()
+        return render(request,'index.html',{"neighbourhoods":neighbourhoods})
 
 def new_business(request):
     current_user = request.user
@@ -70,7 +77,7 @@ def new_business(request):
             business = form.save(commit=False)
             business.user = current_user
             business.save()
-            return redirect('neighbourhood')
+            return redirect('home')
 
     else:
         form = BusinessForm()
@@ -101,22 +108,31 @@ def edit_profile(request):
         form = EditProfileForm(instance = profile)
     return render(request, 'profiles/edit_profile.html', {"form": form})
 
-@login_required(login_url='/accounts/login/')
-def join(request,hoodId):
-
-	hood = Hood.objects.get(pk = hoodId)
-	if Join.objects.filter(user_id = request.user).exists():
-
-		Join.objects.filter(user_id = request.user).update(hood_id = hood)
-	else:
-
-		Join(user_id=request.user,hood_id = hood).save()
-
-	messages.success(request, 'Success! You have succesfully joined this Neighbourhood ')
-	return redirect('hoods')
-
 def hoods(request):
 
 	hoods = Hood.objects.filter(user = request.user)
 	return render(request,'hoods/hood.html',{"hoods":hoods})
+
+@login_required(login_url='/accounts/login/')
+def join(request,hoodId):
+
+	neighbourhood = Hood.objects.get(pk = hoodId)
+	if Join.objects.filter(user_id = request.user).exists():
+
+		Join.objects.filter(user_id = request.user).update(hood_id = neighbourhood)
+	else:
+
+		Join(user_id=request.user,hood_id = neighbourhood).save()
+
+	messages.success(request, 'Success! You have succesfully joined this Neighbourhood ')
+	return redirect('home')
+
+@login_required(login_url='/accounts/login/')
+def exitHood(request,hoodId):
+
+	if Join.objects.filter(user_id = request.user).exists():
+		Join.objects.get(user_id = request.user).delete()
+		messages.error(request, 'You have succesfully exited this Neighbourhood.')
+		return redirect('home')
+
 
