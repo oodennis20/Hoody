@@ -1,27 +1,29 @@
-{%extends "registration/base.html"%}
+{%extends "base.html"%}
 {% load bootstrap4 %}
 {% block content %}
-
-<div class="container-fluid mt-5 p-5" style="justify-content:centered">
-  <header> HOODIE</header>
-
-  <p>Some information might be incorrect</p>
-  {% endif %}
-  <div class="card" style="max-width:30rem;margin-top:5px;align:center;">
-    <div class="card-header">
+<div class="container">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <div class="card card-default">
+        <div class="card-heading">
       <h3 class="text-center">Sign In</h3>
     </div>
     <div class="card-body">
       <form action="/accounts/login/" method="post">
-        {% csrf_token %} {% bootstrap_form form %}
+        {% csrf_token %} 
+        {% bootstrap_form form %}
         <div class="form-group">
-          <input type="submit" class="btn btn-outline-primary btn-sm" value="login">
+          <input type="submit" class="btn btn-primary btn-sm" value="Login">
         </div>
-        <input type="hidden" name="next" value="{{next}}">
+        <p>Not registered yet? Create an account <a href="/signup">here</a></p>
       </form>
     </div>
-    <p class="text-center">Don't have an account?<a class="btn btn-default" href="/signup/">Sign Up</a></p>
+   </div>
   </div>
+
+  <div class="col-md-4"></div>
+</div>
 </div>
 
 {% endblock %}
