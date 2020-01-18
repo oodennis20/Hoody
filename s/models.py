@@ -34,7 +34,7 @@ class Business(models.Model):
     b_description = models.TextField(max_length=200, blank=True, null=True)
     b_email = models.CharField(max_length=100, blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
-    hood = models.ForeignKey(Hood, on_delete=models.CASCADE, related_name='comments', null=True)
+    hood = models.ForeignKey(Hood, on_delete=models.CASCADE, related_name='biz', null=True)
 
     @classmethod
     def get_business(cls):
@@ -47,7 +47,7 @@ class Profile(models.Model):
     profile_photo = ImageField(blank=True,manual_crop='')
     bio= models.CharField(max_length=240, null=True)
     email = models.CharField(max_length=100, blank=True, null=True)
-    u_hood = models.ForeignKey(Hood, on_delete=models.CASCADE, null=True)
+    
 
     @receiver(post_save, sender=User)
     def create_profile(sender,instance,created,**kwargs):
@@ -58,13 +58,48 @@ class Profile(models.Model):
     def save_profile(sender,instance, **kwargs):
         instance.profile.save()
     
-    def save_profile(self):
-        self.save()
-
+    
     @classmethod
     def get_profile(cls):
         profile = Profile.objects.all()
 
         return profile
+
+class Join(models.Model):
+	user_id = models.OneToOneField(User, on_delete=models.CASCADE,null=True )
+	hood_id = models.ForeignKey(Hood, on_delete=models.CASCADE,null=True)
+
+	def __str__(self):
+		return self.user_id
+
+class Posts(models.Model):
+	title = models.CharField(max_length = 300)
+	body = models.TextField()
+	user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+	hood = models.ForeignKey(Hood, on_delete=models.CASCADE,null=True)
+
+	def save_posts(self):
+		self.save()
+
+	def delete_posts(self):
+		self.delete()
+
+	def __str__(self):
+		return self.title
+
+class Comments(models.Model):
+	comment = models.CharField(max_length = 600)
+	user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+	post = models.ForeignKey(Posts, on_delete=models.CASCADE,null=True)
+
+	def save_comment(self):
+		self.save()
+
+	def delete_comment(self):
+		self.delete()
+
+	def __str__(self):
+		return self.comment
+
 
 

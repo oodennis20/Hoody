@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from django.http  import HttpResponse,Http404,HttpResponseRedirect
+from django.http  import HttpResponse,Http404,HttpResponseRedirect,JsonResponse
 from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
@@ -76,21 +76,30 @@ def new_business(request):
         form = BusinessForm()
     return render(request, 'business.html', {"form": form})
 
+@login_required(login_url='/accounts/login')
+def profile(request):
+
+    profile = Profile.objects.get(user = request.user)
+
+    return render(request,"profiles/profile.html",{"profile":profile})    
+
 @login_required(login_url='/accounts/login/')
-def add_profile(request):
+def edit_profile(request):
     current_user = request.user
+    profile = Profile.objects.get(user = request.user)
+
     if request.method == 'POST':
-        form = NewProfileForm(request.POST, request.FILES)
+        form = EditProfileForm(request.POST, request.FILES,instance = profile)
         if form.is_valid():
             profile = form.save(commit=False)
             profile.user = current_user
             profile.email = current_user.email
             profile.save()
-        return redirect('home')
+        return redirect('profile')
 
     else:
-        form = NewProfileForm()
-    return render(request, 'new_profile.html', {"form": form})
+        form = EditProfileForm(instance = profile)
+    return render(request, 'profiles/edit_profile.html', {"form": form})
 
 @login_required(login_url="/accounts/login/")
 def join(request,operation,pk):
@@ -105,9 +114,3 @@ def join(request,operation,pk):
         hood.save()
     return redirect('home')
 
-@login_required(login_url='/accounts/login')
-def profile(request,profile_id):
-
-    profile = Profile.objects.get(pk = profile_id)
-
-    return render(request,"profile.html",{"profile":profile})
