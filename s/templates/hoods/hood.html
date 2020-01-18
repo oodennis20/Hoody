@@ -13,7 +13,7 @@
   </header>
   <div class="row">
     <div class="col-3 ">
-      <a class="btn btn-sm btn-secondary" href="{% url 'creat_post' %}">Create Post</a>
+      
       <a class="btn btn-sm btn-danger" href="{% url 'exitHood' hood.id %}">Leave Neighbourhood</a>
 
       <h4>Police and Healthcare</h4>
@@ -38,7 +38,8 @@
       {% endfor %}
       <div>
         {% else %}
-        <p>No Biz</p>
+        <p>No Posts yet</p>
+        <a class="btn btn-sm btn-secondary" href="{% url 'creat_post' %}">Create Post</a>
         {% endif %}
       </div>
     </div>
@@ -50,7 +51,7 @@
       <div class="media">
         {{businesses.b_name}}
         <div class="media-left media-top">
-          <img class="img-fluid rounded-circle" src="{{biz.b_photo.url}}" class="media-object" style="height: 50px;
+          <img class="img-fluid rounded-circle" src="{{biz.b_photo.cdn_url}}" class="media-object" style="height: 50px;
                   width: 60px;">
         </div>
         <div class="media-body">
