@@ -12,35 +12,26 @@
     <h1>{{hood.hood_name}}</h1>
   </header>
   <div class="row">
-    <div class="col-4">
+    <div class="col-3 ">
       <a class="btn btn-sm btn-secondary" href="{% url 'creat_post' %}">Create Post</a>
       <a class="btn btn-sm btn-danger" href="{% url 'exitHood' hood.id %}">Leave Neighbourhood</a>
-      
+
       <h4>Police and Healthcare</h4>
     </div>
-    <div class="col-6">
-      {% if businesses %}
-      {% for biz in businesses %}
-     
+    <div class="col-5">
+      <h4>{{hood.hood_name}} posts</h4>
+      <hr>
+      {%if posts%}
+      {% for post in posts %}
+      <div class="media">
+        <div class="media-left media-top">
+          <h4 class="media-heading" style="padding:10px; margin:5px">{{post.title}}</h4>
+        </div>
+        <div class="media-body">
 
-      <div class="card mr-0" style="max-width:30rem; margin-top:5px;">
-
-        
-        <div class="card-body">
-          {{business.b_name}}
-          <div class="media">
-            <div class="media-left media-top">
-
-              <img class="img-fluid rounded-circle" src="{{biz.b_photo.url}}" class="media-object" style="height: 70px; width: 70px;">
-
-            </div>
-            <div class="media-body">
-              <h4 class="media-heading" style="padding:10px; margin:5px">{{biz.b_name}}</h4>
-              <button class=" three d-flex justify-content-end" style="float:right; padding:10px; margin:5px">{{ biz.b_description }}</button>
-              <button class="four d-flex justify-content-end" style="float:right; padding:10px; margin:5px">{{ biz.b_email}}</button>
-
-            </div>
-          </div>
+          <p>{{ post.body }}</p>
+          <p>{{post.user.first_name.capitalize}}</p>
+        </div>
         </div>
 
       </div>
@@ -50,11 +41,29 @@
         <p>No Biz</p>
         {% endif %}
       </div>
-</div>
-        <div class="col-2">
-          <h4>List of Neighbours</h4>
-
+    </div>
+    <div class="col-3">
+      <h4>Businesses</h4>
+      <hr>
+      {% if businesses %}
+      {% for biz in businesses %}
+      <div class="media">
+        {{businesses.b_name}}
+        <div class="media-left media-top">
+          <img class="img-fluid rounded-circle" src="{{biz.b_photo.url}}" class="media-object" style="height: 50px;
+                  width: 60px;">
         </div>
+        <div class="media-body">
+          <h4 class="media-heading" style="padding:10px; margin:5px">{{biz.b_name}}</h4>
+          <p>{{ biz.b_description }}</p>
+          <p>{{ biz.b_email}}</p>
+        </div>
+      </div>
+      {% endfor %}
+      <div>
+        {% else %}
+        <p>No Biz</p>
+        {% endif %}
   </div>
 </div>
 
