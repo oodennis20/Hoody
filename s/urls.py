@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^join/(\d+)',views.join,name = 'join'),
     url(r'^myhood/$',views.hoods,name = 'hood'),
     url(r'^exitHood/(\d+)',views.exitHood,name = 'exitHood'),
+    url(r'^createpost/$', views.create_post, name = 'create_post'),
 ]
 
 if settings.DEBUG:
