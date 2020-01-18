@@ -12,12 +12,15 @@
 
 <div class="container-fluid">
   <header>
-    <h1>{{hood.hood_name}}</h1>
+    <h1 style="text-align:center;">{{hood.hood_name}}</h1>
   </header>
   <div class="row">
     <div class="col-3 ">
       
-      <a class="btn btn-sm btn-danger" href="{% url 'exitHood' hood.id %}">Leave Neighbourhood</a>
+      <a class="btn btn-sm btn-danger" href="{% url 'exitHood' hood.id %}" style="margin:10px">Leave Neighbourhood</a>
+      <br>
+      <a class="btn btn-sm btn-primary" href="{% url 'create_post' %}">Create Post</a>
+      <a class="btn btn-sm btn-secondary" href="{% url 'add_business' %}">Add Business</a>
 
       <h4>Police and Healthcare</h4>
     </div>
@@ -32,17 +35,16 @@
         </div>
         <div class="media-body">
           <h4 class="media-heading">{{ post.title }}</h4>
-          <h6 class="media-heading">{{ blogpost.topic }}</h6>
+          
           <p class="media-content">{{ post.content }}</p>
+          <small>{{ post.posted_by }}</small>
+          <hr>
 
         </div>
-        <small><a class="mr-2" href="#">{{ post.user }}</a></small>
         <a href="{% url 'delete_post' post.id %}" class="btn btn-sm btn-danger">Delete</a>
         <hr>
 
-      </div>
-          
-        </div>
+  
 
         </div>
 
@@ -76,9 +78,9 @@
       <div>
         {% else %}
         <p>No Biz</p>
-        <a class="btn btn-sm btn-secondary" href="{% url 'add_business' %}">Add Business</a
+        <a class="btn btn-sm btn-secondary" href="{% url 'add_business' %}">Add Business</a>
         {% endif %}
   </div>
 </div>
-
+</div>
 {% endblock %}

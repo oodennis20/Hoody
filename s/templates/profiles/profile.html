@@ -18,6 +18,7 @@
           <ul class="list-inline">
             <li class="list-inline-item">
               <span class="username">{{ profile.user }}</span>
+              <p class="font3">{{ profile.bio }}</p>
             </li>
             {% if profile.user == user %}
             <!-- <li class="list-inline-item">
@@ -26,20 +27,47 @@
             <li class="list-inline-item">
               <a data-toggle="modal" data-target="#edit" href=""><i class="far fa-edit"></i>Edit Profile</a>
             </li>
+            {% else %}
+            <li class="list-inline-item">
+              <a href="#" class="btn btn-primary"></a>
+            </li>
             {% endif %}
           </ul>
 
           <ul class="list-inline">
             <li class="list-inline-item">
-              <span class="font-weight-bold"></span> Location
+              <span class="font-weight-bold">{{hoods|length}}</span> Hoods
+            </li>
+            <li class="list-inline-item">
+              <span class="font-weight-bold">{{business|length}}</span> Business
             </li>
           <p class="font3">{{profile.bio}}</p>
+
+          {% if profile.user == user %}
+          <p><a href="{% url 'create_hood' %}">Create</a></p>
+          {% endif %}
 
         </div>
       </div>
     </div>
   </div>
   <hr>
+  <div class="container">
+    <div class="row">
+      {% for hood in hoods %}
+      <div class="col-md-4">
+        <img src="{{hood.hood_photo.url}}" alt="Image" style="height:300px;width:300px;">
+      </div>
+      {% empty %}
+      <div class="col-md-12">
+        <h2>Profile has no hoods</h2>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+
+</div>
 
 <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
