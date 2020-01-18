@@ -135,6 +135,22 @@ def exitHood(request,hoodId):
 		Join.objects.get(user_id = request.user).delete()
 		messages.error(request, 'You have succesfully exited this Neighbourhood.')
 		return redirect('home')
+
+def search(request):
+	'''
+	This view function will implement search of a hood
+	'''
+	if request.GET['search']:
+		hood_search = request.GET.get("search")
+		hoods = Hood.search_hood(hood_search)
+		message = f"{hood_search}"
+
+		return render(request,'hoods/search.html',{"message":message,"hoods":hoods})
+
+	else:
+		message = "You Haven't searched for any item"
+		return render(request,'hood/search.html',{"message":message})
+
 @login_required(login_url='/account/login/')
 def create_post(request):
 
@@ -146,11 +162,16 @@ def create_post(request):
 				post.user = request.user
 				post.hood = request.user.join.hood_id
 				post.save()
-				messages.success(request,'You have succesfully created a Forum Post')
+				messages.success(request,'You have succesfully created a Post')
 				return redirect('home')
 		else:
 			form = PostForm()
 		return render(request,'posts/createpost.html',{"form":form})
+
+def delete_post(request,postId):
+	Posts.objects.filter(pk = postId).delete()
+	messages.error(request,'Succesfully Deleted a Post')
+	return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 @login_required(login_url='/account/login/')
 def create_hood(request):

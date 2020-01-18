@@ -6,6 +6,9 @@
 <br>
 <br>
 <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+<div class="c" style="padding-top: 24px">
+  {% include 'message/message.html' %}
+</div>
 
 <div class="container-fluid">
   <header>
@@ -31,7 +34,9 @@
 
           <p>{{ post.body }}</p>
           <p>{{post.user.first_name.capitalize}}</p>
+          <a href="{% url 'delete_post' post.id %}" class="btn btn-sm btn-danger">Delete</a>
         </div>
+
         </div>
 
       </div>
