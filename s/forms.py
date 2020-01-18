@@ -24,7 +24,7 @@ class SignupForm(UserCreationForm):
         model = User
         fields = ('username', 'email', 'password1', 'password2')
 
-class PostForm(forms.ModelForm)
+class PostForm(forms.ModelForm):
     class Meta:
         model = Posts
-        fields = ['title', 'body']
+        fields = ['title', 'content']
