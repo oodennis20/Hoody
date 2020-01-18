@@ -6,28 +6,13 @@
 <title>New Profile</title>
 {{form.media}}
 
-<div class="row container" style="padding-bottom:20px">
+<div class="card mx-auto" style="max-width:50rem; margin-top:50px;">
+  <form action="{%url 'edit_profile'%}" method="post" enctype="multipart/form-data">
+    {%csrf_token%}
 
-  <div class="col-md-3" style="padding-top: 0px">
-
-
-  </div>
-  <div class="col-md-7">
-    <div class="card card-default">
-      <div class="card-heading">
-        <h3 class="">Edit Profile</h3>
-      </div>
-      <div class="card-body">
-        <form action="{% url 'edit_profile' %}" method="post">
-
-          {%csrf_token%}
-          {% bootstrap_form form %}
-          <button type="submit" class="btn btn-success btn-block btn-sm">Update</button>
-        </form>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-2"></div>
+    {% bootstrap_form form%}
+    <input type="submit" class="btn btn-success btn-lg" value="Post">
+  </form>
 
 </div>
 {% block scripts %}

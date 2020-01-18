@@ -22,7 +22,7 @@ def signup(request):
             current_user.is_active = False
             current_user.save()
             current_site = get_current_site(request)
-            mail_subject = 'Activate your Hoods account.'
+            mail_subject = 'Activate your Hoodies account.'
             message = render_to_string('registration/acc_active_email.html', {
                 'user': current_user,
                 'domain': current_site.domain,
@@ -86,7 +86,7 @@ def new_business(request):
 
 @login_required(login_url='/accounts/login')
 def profile(request):
-    
+
     profile = Profile.objects.get(user = request.user)
     hoods = Hood.objects.filter(user = request.user).all()
     business = Business.objects.filter(user = request.user).all()

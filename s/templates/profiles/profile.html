@@ -18,7 +18,7 @@
           <ul class="list-inline">
             <li class="list-inline-item">
               <span class="username">{{ profile.user }}</span>
-              <p class="font3">{{ profile.bio }}</p>
+              
             </li>
             {% if profile.user == user %}
             <!-- <li class="list-inline-item">
@@ -56,13 +56,25 @@
     <div class="row">
       {% for hood in hoods %}
       <div class="col-md-4">
+        <h4>Hoods</h4>
         <img src="{{hood.hood_photo.url}}" alt="Image" style="height:300px;width:300px;">
       </div>
       {% empty %}
-      <div class="col-md-12">
+      <div>
         <h2>Profile has no hoods</h2>
       </div>
       {% endfor %}
+      <div class="col-4">
+        <h4>Business</h4>
+  {% for biz in business %}
+  <img src="{{biz.b_photo.url}}" alt="Image" style="height:300px;width:300px;">
+  {% empty %}
+  <div>
+    <h2>Profile has no business</h2>
+  </div>
+  {% endfor %}
+
+      </div>
     </div>
 
   </div>
