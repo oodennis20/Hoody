@@ -33,6 +33,7 @@
                     </div>
                     <hr>
                     <p>Population: {{hood.occupants_count}} {{ hood.join.count| floatformat }}</p>
+                    <a id="like" href="{% url 'like' operation='like' pk=hood.id%}"></a>
                     <a class="btn btn-sm btn-success" href="{% url 'join' hood.id %}">Join</a>
                 </div>
 
