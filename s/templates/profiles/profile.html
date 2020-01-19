@@ -12,6 +12,7 @@
         <div class="col-md-5">
           {% if profile.profile_photo %}
           <img src="{{profile.profile_photo.cdn_url}}" alt="profile-photo" class="img-fluid-circle" style="border-radius: 50%;height:200px;width: 200px;">
+          <p>{{hood.hood_name}}</p>
           {% endif %}
         </div>
         <div class="col-md-5 text-left">
@@ -57,7 +58,7 @@
       {% for hood in hoods %}
       <div class="col-md-4">
         <h4>Hoods</h4>
-        <img src="{{hood.hood_photo.url}}" alt="Image" style="height:300px;width:300px;">
+        <img src="{{hood.hood_photo.cdn_url}}" alt="Image" style="height:300px;width:300px;">
       </div>
       {% empty %}
       <div>
@@ -67,7 +68,8 @@
       <div class="col-4">
         <h4>Business</h4>
   {% for biz in business %}
-  <img src="{{biz.b_photo.url}}" alt="Image" style="height:300px;width:300px;">
+  <img src="{{biz.b_photo.cdn_url}}" alt="Image" style="height:300px;width:300px;">
+  <p>{{biz.b_name}}</p>
   {% empty %}
   <div>
     <h2>Profile has no business</h2>

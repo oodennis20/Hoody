@@ -37,7 +37,7 @@
           <h4 class="media-heading">{{ post.title }}</h4>
           
           <p class="media-content">{{ post.content }}</p>
-          <small>{{ post.posted_by }}</small>
+          <small>Resident:{{ post.posted_by }}</small>
           <hr>
 
         </div>
@@ -53,7 +53,7 @@
       <div>
         {% else %}
         <p>No Posts yet</p>
-        <a class="btn btn-sm btn-secondary" href="{% url 'creat_post' %}">Create Post</a>
+        <a class="btn btn-sm btn-secondary" href="{% url 'create_post' %}">Create Post</a>
         {% endif %}
       </div>
     </div>

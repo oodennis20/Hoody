@@ -3,6 +3,7 @@ from django.http  import HttpResponse,Http404,HttpResponseRedirect,JsonResponse
 from django.contrib.auth.decorators import login_required
 from .models import *
 from .forms import *
+from django.contrib.auth import logout
 from django.contrib.auth import login, authenticate
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
@@ -22,7 +23,7 @@ def signup(request):
             current_user.is_active = False
             current_user.save()
             current_site = get_current_site(request)
-            mail_subject = 'Activate your Hoodies account.'
+            mail_subject = 'Activate your Hoody account.'
             message = render_to_string('registration/acc_active_email.html', {
                 'user': current_user,
                 'domain': current_site.domain,
@@ -206,3 +207,10 @@ def create_hood(request):
         form = CreateHoodForm()
     return render(request,'hoods/create_hood.html',{"form":form})
 
+@login_required(login_url="/accounts/login/")
+def logout_request(request):
+    '''
+    view function renders home page once logout
+    '''
+    logout(request)
+    return redirect('home')
