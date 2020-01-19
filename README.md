@@ -1,5 +1,3 @@
-![HOODY](/static/img/logo.png)
-
 
 ## Built By [Dennis](https://github.com/oodennis20/)
 
