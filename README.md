@@ -1,5 +1,4 @@
-(<header class="text-center" style="font-size: 40px;"><img src="/static/img/logo.png" alt="" class="img-fluid-circle" style="border-radius: 50%;height:50px;width: 50px;"> HOODY</header>
-)
+![HOODY](/static/img/logo.png)
 
 
 ## Built By [Dennis](https://github.com/oodennis20/)

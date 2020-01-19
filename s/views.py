@@ -57,18 +57,18 @@ def activate(request, uidb64, token):
 
 def home(request):
     if request.user.is_authenticated:
-        if Join.objects.filter(user_id = request.user).exists():
-            hood = Hood.objects.get(pk = request.user.join.hood_id.id)
-            posts =Posts.objects.filter(hood = request.user.join.hood_id.id)
-            businesses = Business.objects.filter(hood = request.user.join.hood_id.id)
-            return render(request,'hoods/hood.html',{"hood":hood,"businesses":businesses,"posts":posts})
+        if Join.objects.filter(user_id=request.user).exists():
+            hood = Hood.objects.get(pk=request.user.join.hood_id.id)
+            posts = Posts.objects.filter(hood=request.user.join.hood_id.id)
+            businesses = Business.objects.filter(hood=request.user.join.hood_id.id)
+
+            return render(request, 'hoods/hood.html', {"hood": hood, "businesses": businesses, "posts": posts})
         else:
             neighbourhoods = Hood.objects.all()
-            return render(request,'index.html',{"neighbourhoods":neighbourhoods})
+            return render(request, 'index.html', {"neighbourhoods": neighbourhoods})
     else:
         neighbourhoods = Hood.objects.all()
-        return render(request,'index.html',{"neighbourhoods":neighbourhoods})
-
+        return render(request, 'index.html', {"neighbourhoods": neighbourhoods})
 def new_business(request):
     current_user = request.user
 
@@ -208,27 +208,15 @@ def create_hood(request):
     return render(request,'hoods/create_hood.html',{"form":form})
 
 @login_required(login_url='/accounts/login/')
-def update_hood(request,id):
-    current_user = request.user
-    hood = get_object_or_404(Hood,pk=id)
-    if request.method == 'POST':
-        form = CreateHoodForm(request.POST, request.FILES, instance = hood)
-        if form.is_valid():
-            hood = form.save(commit = False)
-            hood.user = current_user
-            hood.save()
-            messages.success(request, 'You Have succesfully Edited Hood Details.')
-        return redirect('home')
-    else:
-        form = CreateHoodForm(instance = hood)
-    return render(request,'hoods/create_hood.html',{"form":form})
-
-@login_required(login_url='/accounts/login/')
 def delete_hood(request,id):
 
 	Hood.objects.filter(user = request.user,pk=id).delete()
 	messages.error(request,'Succesfully deleted your hood')
 	return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def occupants(request, id):
+    occupants = Join.objects.filter(id=hood_id).count()
+    return redirect('home')
 
 @login_required(login_url="/accounts/login/")
 def logout_request(request):
