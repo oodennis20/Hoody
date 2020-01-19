@@ -98,8 +98,8 @@ TEMPLATES = [
 ]
 
 UPLOADCARE = {
-    'pub_key': 'b3b631fd1c4393d31795',
-    'secret': '787678858a63d855993d',
+    'pub_key': 'f842f0c206d7a1332a9f',
+    'secret': '9a215d554a4be02dcf7b',
 }
 
 WSGI_APPLICATION = 'hood.wsgi.application'
