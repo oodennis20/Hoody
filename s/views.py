@@ -130,18 +130,6 @@ def join(request,hoodId):
 	messages.success(request, 'Success! You have succesfully joined this Neighbourhood ')
 	return redirect('home')
 
-@login_required(login_url="/accounts/login/")
-def like(request,operation,pk):
-    hood = get_object_or_404(Hood,pk=pk)
-
-    if operation == 'join':
-        hood.likes += 1
-        hood.save()
-    elif operation =='exitHood':
-        hood.likes -= 1
-        hood.save()
-    return redirect('home')
-
 @login_required(login_url='/accounts/login/')
 def exitHood(request,hoodId):
 
@@ -162,7 +150,7 @@ def search(request):
 		return render(request,'hoods/search.html',{"message":message,"hoods":hoods})
 
 	else:
-		message = "You Haven't searched for any item"
+		message = "You Haven't searched for any Hood"
 		return render(request,'hood/search.html',{"message":message})
 
 @login_required(login_url='/account/login/')

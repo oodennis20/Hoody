@@ -12,7 +12,8 @@
 
 <div class="container-fluid">
   <header>
-    <h1 style="text-align:center;">{{hood.hood_name}}</h1>
+    <h1 class="text-center" style="font-weight:bold">{{hood.hood_name}}</h1>
+    <h5 class="text-center"><small>{{hood.location}}</small></h5>
   </header>
   <div class="row">
     <div class="col-3 ">
@@ -23,6 +24,7 @@
       <a class="btn btn-sm btn-secondary" href="{% url 'add_business' %}">Add Business</a>
 
       <h4>Police and Healthcare</h4>
+      <p><small>0712345678</small></p>
     </div>
     <div class="col-5">
       <h4>{{hood.hood_name}} posts</h4>
