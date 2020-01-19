@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^createhood/$', views.create_hood, name='create_hood'),
     url(r'^deletepost/(\d+)',views.delete_post,name = 'delete_post'),
     url(r'^search/$',views.search,name= 'search'),
+    url(r'^deletehood/(\d+)',views.delete_hood,name = 'delete_hood'),
 ]
 
 if settings.DEBUG:

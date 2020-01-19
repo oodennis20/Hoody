@@ -207,6 +207,12 @@ def create_hood(request):
         form = CreateHoodForm()
     return render(request,'hoods/create_hood.html',{"form":form})
 
+def delete_hood(request,id):
+
+	Hood.objects.filter(user = request.user,pk=id).delete()
+	messages.error(request,'Succesfully deleted your hood')
+	return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 @login_required(login_url="/accounts/login/")
 def logout_request(request):
     '''
