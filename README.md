@@ -42,7 +42,7 @@ Admin should:
 * In your terminal:
 
         $ git clone https://github.com/oodennis20/Hoody
-        $ cd Awards
+        $ cd Hoody
 
 ## Running the Application
 * Creating the virtual environment
